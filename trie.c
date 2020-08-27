@@ -36,42 +36,48 @@ void free_trienode(Trie* node) {
 }
 
 Trie* insert_trie(Trie* root, char* word) {
-    printf("inserting");
-    // Inserts the word onto the Trie
-    // ASSUMPTION: The word only has lower case characters
     Trie* temp = root;
+    int letterNumber;
+    int indexOnTree;
 
     for (int i=0; word[i] != '\0'; i++) {
         // Get the relative position in the alphabet list
-        int idx = (int) word[i] - 'a';
-        if (temp->children[idx] == NULL) {
-            // If the corresponding child doesn't exist,
-            // simply create that child!
-            temp->children[idx] = make_trienode(word[i]);
+        letterNumber = (int) word[i];
+        if (letterNumber>=65 && letterNumber <=90){
+            indexOnTree = (int) word[i] - 'A';
+        } else{
+            indexOnTree = (int) word[i] - 'a';
         }
-        else {
-            // Do nothing. The node already exists
+
+        if (temp->children[indexOnTree] == NULL) {
+
+            temp->children[indexOnTree] = make_trienode(word[i]);
         }
-        // Go down a level, to the child referenced by idx
-        // since we have a prefix match
-        temp = temp->children[idx];
+        else {}
+        temp = temp->children[indexOnTree];
     }
-    // At the end of the word, mark this node as the leaf node
+
     temp->is_leaf = 1;
     return root;
 }
 
-int search_trie(Trie* root, char* word)
+int search_trie(Trie* root, const char* word)
 {
-    // Searches for word in the Trie
     Trie* temp = root;
+    int letterNumber;
+    int indexOnTree;
 
     for(int i=0; word[i]!='\0'; i++)
     {
-        int position = word[i] - 'a';
-        if (temp->children[position] == NULL)
+        letterNumber = (int) word[i];
+        if (letterNumber>=65 && letterNumber <=90){
+            indexOnTree = (int) word[i] - 'A';
+        } else{
+            indexOnTree = (int) word[i] - 'a';
+        }
+        if (temp->children[indexOnTree] == NULL)
             return 0;
-        temp = temp->children[position];
+        temp = temp->children[indexOnTree];
     }
     if (temp != NULL && temp->is_leaf == 1)
         return 1;
@@ -87,14 +93,23 @@ int check_divergence(Trie* root, char* word) {
         return 0;
     // We will return the largest index where branching occurs
     int last_index = 0;
+
+    int letterNumber;
+    int indexOnTree;
+
     for (int i=0; i < len; i++) {
-        int position = word[i] - 'a';
-        if (temp->children[position]) {
+        letterNumber = (int) word[i];
+        if (letterNumber>=65 && letterNumber <=90){
+            indexOnTree = (int) word[i] - 'A';
+        } else{
+            indexOnTree = (int) word[i] - 'a';
+        }
+        if (temp->children[indexOnTree]) {
             // If a child exists at that position
             // we will check if there exists any other child
             // so that branching occurs
             for (int j=0; j < LETTERS; j++) {
-                if (j != position && temp->children[j]) {
+                if (j != indexOnTree && temp->children[j]) {
                     // We've found another child! This is a branch.
                     // Update the branch position
                     last_index = i + 1;
@@ -102,7 +117,7 @@ int check_divergence(Trie* root, char* word) {
                 }
             }
             // Go to the next child in the sequence
-            temp = temp->children[position];
+            temp = temp->children[indexOnTree];
         }
     }
     return last_index;
@@ -143,10 +158,18 @@ int is_leaf_node(Trie* root, char* word) {
     // Checks if the prefix match of word and root
     // is a leaf node
     Trie* temp = root;
+    int letterNumber;
+    int indexOnTree;
     for (int i=0; word[i]; i++) {
-        int position = (int) word[i] - 'a';
-        if (temp->children[position]) {
-            temp = temp->children[position];
+
+        letterNumber = (int) word[i];
+        if (letterNumber>=65 && letterNumber <=90){
+            indexOnTree = (int) word[i] - 'A';
+        } else{
+            indexOnTree = (int) word[i] - 'a';
+        }
+        if (temp->children[indexOnTree]) {
+            temp = temp->children[indexOnTree];
         }
     }
     return temp->is_leaf;
@@ -174,11 +197,20 @@ Trie* delete_trie(Trie* root, char* word) {
     }
     // Keep track of position in the Trie
     int i;
+    int letterNumber;
+    int indexOnTree;
     for (i=0; longest_prefix[i] != '\0'; i++) {
-        int position = (int) longest_prefix[i] - 'a';
-        if (temp->children[position] != NULL) {
+
+        letterNumber = (int) longest_prefix[i];
+        if (letterNumber>=65 && letterNumber <=90){
+            indexOnTree = (int) longest_prefix[i] - 'A';
+        } else{
+            indexOnTree = (int) longest_prefix[i] - 'a';
+        }
+
+        if (temp->children[indexOnTree] != NULL) {
             // Keep moving to the deepest node in the common prefix
-            temp = temp->children[position];
+            temp = temp->children[indexOnTree];
         }
         else {
             // There is no such node. Simply return.
@@ -191,11 +223,17 @@ Trie* delete_trie(Trie* root, char* word) {
     // corresponding to word
     int len = strlen(word);
     for (; i < len; i++) {
-        int position = (int) word[i] - 'a';
-        if (temp->children[position]) {
+        letterNumber = (int) word[i];
+        if (letterNumber>=65 && letterNumber <=90){
+            indexOnTree = (int) word[i] - 'A';
+        } else{
+            indexOnTree = (int) word[i] - 'a';
+        }
+
+        if (temp->children[indexOnTree]) {
             // Delete the remaining sequence
-            Trie* rm_node = temp->children[position];
-            temp->children[position] = NULL;
+            Trie* rm_node = temp->children[indexOnTree];
+            temp->children[indexOnTree] = NULL;
             free_trienode(rm_node);
         }
     }

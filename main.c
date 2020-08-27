@@ -10,9 +10,26 @@ void printLetters();
 
 int main() {
     Trie* root = make_trienode('\0');
-
     readFileAndInsertTree(root);
-    //printLetters();
+    int input;
+
+    while (true){
+        printf( "Enter a value :");
+        scanf("%d", &input);
+        if (input==0){
+            print_search(root, "last");
+            break;
+        }
+
+        switch (input) {
+            case 0:{
+
+            }
+            default:{
+                printf("Digite uma opcao:");
+            }
+        }
+    }
 
     return 0;
 }
@@ -44,13 +61,13 @@ void readFileAndInsertTree(Trie *trie) {
 void printLetters(){
     int a, b;
     a = 90-65;
-    for (int i = 65; i < 90; ++i) {
-        printf("%c", (char) i);
+    for (int i = 65; i <= 90; ++i) {
+        printf("%c:%i ", (char) i, i);
     }
     printf("\n");
     b = 122-97;
-    for (int i = 97; i < 122; ++i) {
-        printf("%c", (char) i);
+    for (int i = 97; i <= 122; ++i) {
+        printf("%c:%i ", (char) i, i);
     }
     printf("\nTotal de letras: %i", a+b);
 }

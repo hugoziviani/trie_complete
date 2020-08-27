@@ -10,7 +10,7 @@ typedef struct Trie Trie;
 Trie* make_trienode(char data);
 void free_trienode(Trie* node);
 Trie* insert_trie(Trie* root, char* word);
-int search_trie(Trie* root, char* word);
+int search_trie(Trie* root, const char* word);
 int check_divergence(Trie* root, char* word);
 char* find_longest_prefix(Trie* root, char* word);
 int is_leaf_node(Trie* root, char* word);
