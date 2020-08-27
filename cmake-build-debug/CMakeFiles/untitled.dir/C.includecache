@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/hz/CLionProjects/untitled/trie.c
+trie.h
+/Users/hz/CLionProjects/untitled/trie.h
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+
+/Users/hz/CLionProjects/untitled/trie.h
+
