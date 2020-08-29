@@ -1,0 +1,22 @@
+Estudo para compreender a estrutura de dados Trie.
+1- Trie é uma árvore digital ou uma árvore de prefixos
+
+2- Cada nó tem um vetor de links para outros nós e o valor do próprio nó.
+Isso pode ser visto na Struct Trie{}. Esse vetor com ponteiro para outros nós
+tem o tamanho do alfabeto escolhido.
+
+3- Os caracteres são definidos implicitamente pelo seu index de acordo com a tabela ASCii.
+
+4- O único nó que não é apontado por nenhum é a raiz.
+
+5- A posição do nó na árvore que define a chave primária.
+
+6- Quem armazena a cadeia completa dos caracteres é o nó folha. Até chegar neles a gente tem
+os prefixos de cada palavra.
+
+A consequência disso é o armazenamento de somente o prefixo das palavras.
+
+Quando armazenamos uma cadeia de caracteres, a partir de um prefixo, consigo encontar
+todas as cadeias que estão armazenada na árvore.
+
+OBJETIVO: dado um prefixo, consigo encontrar a palavra de maneira mais simples.

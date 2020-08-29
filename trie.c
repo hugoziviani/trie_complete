@@ -4,21 +4,24 @@
 #include <string.h>
 
 struct Trie {
-    // The Trie Node Structure
-    // Each node has LETTERS children, starting from the root
-    // and a flag to check if it's a leaf node
-    char data; // Storing for printing purposes only
+    //cada nó tem um vetor dinamico com todas as letras do alfabeto escolhido
+    //começando da raiz
+    //se for nó-folha ele armazenará a palavra completa.
+    char data;
     Trie* children[LETTERS];
-    int is_leaf;
+    int isLeaf;
+    int occurences;
+    char* completeWord;
 };
 
-Trie* make_trienode(char data) {
-    // Allocate memory for a Trie
+Trie* doTrienode(char data) {
+    // cria o nó e aloca memória
     Trie* node = (Trie*) calloc (1, sizeof(Trie));
     for (int i=0; i < LETTERS; i++)
         node->children[i] = NULL;
-    node->is_leaf = 0;
+    node->isLeaf = 0;
     node->data = data;
+    node->occurences = 0;
     return node;
 }
 
@@ -35,13 +38,13 @@ void free_trienode(Trie* node) {
     free(node);
 }
 
-Trie* insert_trie(Trie* root, char* word) {
+Trie* insertOnTrie(Trie* root, char* word) {
+    // para inserir localiza a posição de cada letra no alfabeto
     Trie* temp = root;
     int letterNumber;
     int indexOnTree;
 
     for (int i=0; word[i] != '\0'; i++) {
-        // Get the relative position in the alphabet list
         letterNumber = (int) word[i];
         if (letterNumber>=65 && letterNumber <=90){
             indexOnTree = (int) word[i] - 'A';
@@ -50,18 +53,26 @@ Trie* insert_trie(Trie* root, char* word) {
         }
 
         if (temp->children[indexOnTree] == NULL) {
-
-            temp->children[indexOnTree] = make_trienode(word[i]);
+            // se o index da primeira letra da palavra a ser inserida for nulo, é criado um novo nó com seus filhos para receberem os posteriores ponteiros
+            temp->children[indexOnTree] = doTrienode(word[i]);
         }
-        else {}
+        else {
+            // faz nada, pois já tem o nó.
+        }
         temp = temp->children[indexOnTree];
     }
-
-    temp->is_leaf = 1;
+    temp->isLeaf = 1;
+    if(temp->occurences <= 0){
+        temp->occurences +=1;
+        temp->completeWord = (char*) malloc(strlen(word) * sizeof(char));
+        strcpy(temp->completeWord, word);
+    }else{
+        temp->occurences +=1;
+    }
     return root;
 }
 
-int search_trie(Trie* root, const char* word)
+int searchOnTrie(Trie* root, const char* word)
 {
     Trie* temp = root;
     int letterNumber;
@@ -75,12 +86,18 @@ int search_trie(Trie* root, const char* word)
         } else{
             indexOnTree = (int) word[i] - 'a';
         }
-        if (temp->children[indexOnTree] == NULL)
+        if (temp->children[indexOnTree] == NULL){
             return 0;
+        }
         temp = temp->children[indexOnTree];
     }
-    if (temp != NULL && temp->is_leaf == 1)
+    if (temp != NULL && temp->isLeaf == 1){
+
+        printf("Ocorrencias: %i\n", temp->occurences);
+        printf("Palavra: %s\n", temp->completeWord);
         return 1;
+    }
+
     return 0;
 }
 
@@ -124,12 +141,11 @@ int check_divergence(Trie* root, char* word) {
 }
 
 char* find_longest_prefix(Trie* root, char* word) {
-    // Finds the longest common prefix substring of word
-    // in the Trie
+    // busca pelo prefixo
     if (!word || word[0] == '\0')
         return NULL;
-    // Length of the longest prefix
-    int len = strlen(word);
+    int len;
+    len = strlen(word);
 
     // We initially set the longest prefix as the word itself,
     // and try to back-tracking from the deepst position to
@@ -172,7 +188,7 @@ int is_leaf_node(Trie* root, char* word) {
             temp = temp->children[indexOnTree];
         }
     }
-    return temp->is_leaf;
+    return temp->isLeaf;
 }
 
 Trie* delete_trie(Trie* root, char* word) {
@@ -254,7 +270,7 @@ void print_trie(Trie* root) {
 
 void print_search(Trie* root, char* word) {
     printf("Searching for %s: ", word);
-    if (search_trie(root, word) == 0)
+    if (searchOnTrie(root, word) == 0)
         printf("Not Found\n");
     else
         printf("Found!\n");
@@ -262,11 +278,11 @@ void print_search(Trie* root, char* word) {
 
 int usage() {
     // Driver program for the Trie Data Structure Operations
-    Trie* root = make_trienode('\0');
-    root = insert_trie(root, "hello");
-    root = insert_trie(root, "hi");
-    root = insert_trie(root, "teabag");
-    root = insert_trie(root, "teacan");
+    Trie* root = doTrienode('\0');
+    root = insertOnTrie(root, "hello");
+    root = insertOnTrie(root, "hi");
+    root = insertOnTrie(root, "teabag");
+    root = insertOnTrie(root, "teacan");
     print_search(root, "tea");
     print_search(root, "teabag");
     print_search(root, "teacan");

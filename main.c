@@ -9,7 +9,7 @@ void readFileAndInsertTree(Trie *trie);
 void printLetters();
 
 int main() {
-    Trie* root = make_trienode('\0');
+    Trie* root = doTrienode('\0');
     readFileAndInsertTree(root);
     int input;
 
@@ -20,17 +20,20 @@ int main() {
             print_search(root, "last");
             break;
         }
-
-        switch (input) {
-            case 0:{
-
-            }
-            default:{
-                printf("Digite uma opcao:");
-            }
+        if (input==1){
+            char * pref;
+            pref = find_longest_prefix(root, "b");
+            printf("Encontrado: %s\n", pref);
+            break;
         }
-    }
+        if (input==3){
+            searchOnTrie(root, "soon");
+            break;
+        }
 
+    }
+    //liberando espaço de memória alocado
+    free_trienode(root);
     return 0;
 }
 
@@ -45,16 +48,16 @@ void readFileAndInsertTree(Trie *trie) {
         char * wordToken = strtok(buffer, delimiters);
         while(wordToken != NULL ) {
             //printf("%s|", wordToken);
-            insert_trie(trie, (char *) wordToken);
+            insertOnTrie(trie, (char *) wordToken);
             //Inserir aqui cada palavra na árvore
-
             wordToken = strtok(NULL, delimiters);
         }
-
-        printf("\n");
+        //printf("\n");
         count_lines ++;
     }
-    printf("%i",count_lines);
+    if(count_lines>0){
+        printf("\v\vArquivo preenchido com: %i linhas\n",count_lines);
+    }
     fclose(arq);
 }
 
