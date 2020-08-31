@@ -118,7 +118,7 @@ int searchPrefixOnTrie(Trie* root, const char* prefix){
     int indexOnTree;
     char *prefixTemp;
 
-    for (int i=0; prefix[i]; i++) {
+    for (int i=0; prefix[i]!='\0'; i++) {
 
         letterNumber = (int) prefix[i];
         if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
@@ -126,13 +126,20 @@ int searchPrefixOnTrie(Trie* root, const char* prefix){
         } else{
             indexOnTree = (int) prefix[i] - 'a' + 26;
         }
+        if (tempRoot->children[indexOnTree]==NULL){
+            return 0;
+        }
         if (tempRoot->children[indexOnTree]) {
             tempRoot = tempRoot->children[indexOnTree];
-            printf("%c", tempRoot->data);
-
+            //printf("%c", tempRoot->data);
         }
+
     }
-    printf("\nDATA: %s\n", tempRoot->completeWord);
+    print_trie(tempRoot);
+    //a partir da segunda letra do prefixo, navegar até um nó folha.
+    // depois q sai do for, navegar todos os nós até achar um nó folha
+    // imprimir a palavra e sua recorrência
+
        //printf("%c", tempRoot->data);
 
 //    if(tempRoot != NULL && tempRoot->isLeaf){
@@ -305,7 +312,10 @@ void print_trie(Trie* root) {
     if (!root)
         return;
     Trie* temp = root;
-    printf("%c -> ", temp->data);
+    if (temp->isLeaf && temp->completeWord != NULL){
+        printf("Fim: %s\n", temp->completeWord);
+    }
+    //printf("%c -> ", temp->data);
     for (int i=0; i < LETTERS; i++) {
         print_trie(temp->children[i]);
     }

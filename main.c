@@ -18,7 +18,7 @@ int main() {
         printf( "Enter a value :");
         scanf("%d", &input);
         if (input==0){
-            searchPrefixOnTrie(root, "sh");
+            searchPrefixOnTrie(root, "she");
             break;
         }
         if (input==1){
