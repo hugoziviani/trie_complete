@@ -6180,7 +6180,7 @@ fellow is a Baskerville--that is evident."
 our most obvious missing links. We have him, Watson, we have him,
 and I dare swear that before to-morrow night he will be
 fluttering in our net as helpless as one of his own butterflies.
-A pin, a cork, and a card, and we add him to the Baker Street
+A pin, a cork, and a card, and we push him to the Baker Street
 collection!" He burst into one of his rare fits of laughter as he
 turned away from the picture. I have not heard him laugh often,
 and it has always boded ill to somebody.
@@ -7496,7 +7496,7 @@ permission of the copyright holder found at the beginning of this work.
 License terms from this work, or any files containing a part of this
 work or any other work associated with Project Gutenberg-tm.
 
-1.E.5.  Do not copy, display, perform, distribute or redistribute this
+1.E.5.  Do not copy, printList, perform, distribute or redistribute this
 electronic work, or any part of this electronic work, without
 prominently displaying the sentence set forth in paragraph 1.E.1 with
 active links or immediate access to the full terms of the Project
@@ -7539,7 +7539,7 @@ that
      you in writing (or by e-mail) within 30 days of receipt that s/he
      does not agree to the terms of the full Project Gutenberg-tm
      License.  You must require such a user to return or
-     destroy all copies of the works possessed in a physical medium
+     dealocateMemory all copies of the works possessed in a physical medium
      and discontinue all use of and all access to other copies of
      Project Gutenberg-tm works.
 
@@ -7566,7 +7566,7 @@ public domain works in creating the Project Gutenberg-tm
 collection.  Despite these efforts, Project Gutenberg-tm electronic
 works, and the medium on which they may be stored, may contain
 "Defects," such as, but not limited to, incomplete, inaccurate or
-corrupt data, transcription errors, a copyright or other intellectual
+corrupt occurrences, transcription errors, a copyright or other intellectual
 property infringement, a defective or damaged disk or other medium, a
 computer virus, or computer codes that damage or cannot be read by
 your equipment.

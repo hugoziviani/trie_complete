@@ -2,38 +2,62 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <time.h>
+
 
 #include "trie.h"
+#include "linkedList.h"
 
 void readFileAndInsertTree(Trie *trie);
 void printLetters();
-char* reverseCopy(char*, const char*, int num);
+void statistics(clock_t t1, clock_t t2, char* timeSpentId);
+
 
 int main() {
     Trie* root = doTrienode('\0');
+    clock_t t1, t2;
+    t1= clock();
     readFileAndInsertTree(root);
+    t2= clock();
+    statistics(t1, t2, "Reading file and inserting on Trie");
     int input;
 
     while (true){
         printf( "Enter a value :");
         scanf("%d", &input);
         if (input==0){
-            searchPrefixOnTrie(root, "she");
+            searchPrefixOnTrie(root, "she", NULL);
             break;
         }
         if (input==1){
-            char *pref = "Olaaaaaaaaaaaaaaa";
-            char *dest = (char *) malloc(strlen(pref));
-            searchPrefixOnTrie(root, "she");
-            //printf("Encontrado: %s\n", pref);
+            //searchUntilLeaf(root);
             break;
         }
         if (input==3){
-            searchOnTrie(root, "shelf");
+            List * elements = makeList();
+            searchPrefixOnTrie(root, "sh", elements);
+            sort(elements);
+            printList(elements);
+            dealocateMemory(elements);
             break;
         }
         if (input==4){
             printLetters();
+        }
+        if (input==5){
+            List * elements = makeList();
+            push(elements, 2, "ok1");
+            push(elements, 333, "ok2");
+            push(elements, 10,  "ok3");
+            push(elements, 3, "ok4");
+            push(elements, 22,  "ok5");
+            push(elements, 999, "ok6");
+            push(elements, 100,  "ok66");
+            sort(elements);
+            printList(elements);
+            dealocateMemory(elements);
+
+
         }
     }
     //liberando espaço de memória alocado
@@ -84,11 +108,9 @@ void printLetters(){
     printf("\nTotal de letras Minusculas: %i",countB);
 }
 
-char* reverseCopy(char* destination, const char* prefix, int num) {
-    char *newPrefix;
-    newPrefix = malloc(strlen(prefix)-1);
-    for (int i = 1; prefix[i]!='\0'; i++) {
-        newPrefix[i-1]=prefix[i];
-    }
-    return newPrefix;
+void statistics(clock_t t1, clock_t t2, char* timeSpentId){
+    clock_t t;
+    t = t2 - t1;
+    double timeTaken = ((double)t)/CLOCKS_PER_SEC;
+    printf("%s: %.4f segundos\n",timeSpentId, timeTaken);
 }
