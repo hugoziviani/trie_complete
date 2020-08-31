@@ -25,16 +25,16 @@ Trie* doTrienode(char data) {
     return node;
 }
 
-void free_trienode(Trie* node) {
-    // Free the trienode sequence
+void freeMemoryTree(Trie* node) {
     for(int i=0; i < LETTERS; i++) {
         if (node->children[i] != NULL) {
-            free_trienode(node->children[i]);
+            freeMemoryTree(node->children[i]);
         }
         else {
             continue;
         }
     }
+    free(node->completeWord);
     free(node);
 }
 
@@ -46,18 +46,20 @@ Trie* insertOnTrie(Trie* root, char* word) {
 
     for (int i=0; word[i] != '\0'; i++) {
         letterNumber = (int) word[i];
-        if (letterNumber>=65 && letterNumber <=90){
+        if (letterNumber >= (int)'A' && letterNumber <= (int)'Z'){
             indexOnTree = (int) word[i] - 'A';
         } else{
-            indexOnTree = (int) word[i] - 'a';
+            indexOnTree = (int) word[i] - 'a' + 26;
         }
 
         if (temp->children[indexOnTree] == NULL) {
             // se o index da primeira letra da palavra a ser inserida for nulo, é criado um novo nó com seus filhos para receberem os posteriores ponteiros
             temp->children[indexOnTree] = doTrienode(word[i]);
+            temp->occurences += 1;
         }
         else {
             // faz nada, pois já tem o nó.
+            temp->occurences += 1;
         }
         temp = temp->children[indexOnTree];
     }
@@ -81,7 +83,7 @@ int searchOnTrie(Trie* root, const char* word)
     for(int i=0; word[i]!='\0'; i++)
     {
         letterNumber = (int) word[i];
-        if (letterNumber>=65 && letterNumber <=90){
+        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
             indexOnTree = (int) word[i] - 'A';
         } else{
             indexOnTree = (int) word[i] - 'a';
@@ -101,43 +103,86 @@ int searchOnTrie(Trie* root, const char* word)
     return 0;
 }
 
+char* shiftPrefix(const char* prefix) {
+    char *newPrefix;
+    newPrefix = malloc(strlen(prefix)-1);
+    for (int i = 1; prefix[i]!='\0'; i++) {
+        newPrefix[i-1]=prefix[i];
+    }
+    return newPrefix;
+}
+
+int searchPrefixOnTrie(Trie* root, const char* prefix){
+    Trie* tempRoot = root;
+    int letterNumber;
+    int indexOnTree;
+    char *prefixTemp;
+
+    for (int i=0; prefix[i]; i++) {
+
+        letterNumber = (int) prefix[i];
+        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
+            indexOnTree = (int) prefix[i] - 'A';
+        } else{
+            indexOnTree = (int) prefix[i] - 'a' + 26;
+        }
+        if (tempRoot->children[indexOnTree]) {
+            tempRoot = tempRoot->children[indexOnTree];
+            printf("%c", tempRoot->data);
+
+        }
+    }
+    printf("\nDATA: %s\n", tempRoot->completeWord);
+       //printf("%c", tempRoot->data);
+
+//    if(tempRoot != NULL && tempRoot->isLeaf){
+//        printf("Ocorrencias: %i\n", tempRoot->occurences);
+//        printf("Palavra: %s\n", tempRoot->completeWord);
+//        return 1;
+//    }
+    return 0;
+}
+
+
 int check_divergence(Trie* root, char* word) {
     // Checks if there is branching at the last character of word
     // and returns the largest position in the word where branching occurs
     Trie* temp = root;
-    int len = strlen(word);
-    if (len == 0)
+    int wordLength = strlen(word);
+    if (wordLength == 0)
         return 0;
-    // We will return the largest index where branching occurs
-    int last_index = 0;
-
+    int lastIdx = 0;
     int letterNumber;
     int indexOnTree;
 
-    for (int i=0; i < len; i++) {
+    for (int i=0; i < wordLength; i++) {
         letterNumber = (int) word[i];
-        if (letterNumber>=65 && letterNumber <=90){
+        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
             indexOnTree = (int) word[i] - 'A';
         } else{
             indexOnTree = (int) word[i] - 'a';
         }
         if (temp->children[indexOnTree]) {
-            // If a child exists at that position
-            // we will check if there exists any other child
-            // so that branching occurs
+            //Se existe um nó filho,
+            // será checado se existem outros abaixo
+
             for (int j=0; j < LETTERS; j++) {
-                if (j != indexOnTree && temp->children[j]) {
-                    // We've found another child! This is a branch.
-                    // Update the branch position
-                    last_index = i + 1;
-                    break;
+                if (temp->children[j]) {
+                    // se entrar aqui achou mais um filho
+                    lastIdx = i + 1;
+                    printf("intro:%c",temp->data);
+
+
                 }
+
             }
-            // Go to the next child in the sequence
+            // faz a busca para o proximo nó
             temp = temp->children[indexOnTree];
+            printf("palavra: %c\n",temp->data);
+            printf("palavra{}: %s\n",temp->completeWord);
         }
     }
-    return last_index;
+    return lastIdx;
 }
 
 char* find_longest_prefix(Trie* root, char* word) {
@@ -170,19 +215,17 @@ char* find_longest_prefix(Trie* root, char* word) {
     return longest_prefix;
 }
 
-int is_leaf_node(Trie* root, char* word) {
-    // Checks if the prefix match of word and root
-    // is a leaf node
+int nodeIsLeaf(Trie* root, char* word) {
     Trie* temp = root;
     int letterNumber;
     int indexOnTree;
     for (int i=0; word[i]; i++) {
 
         letterNumber = (int) word[i];
-        if (letterNumber>=65 && letterNumber <=90){
+        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
             indexOnTree = (int) word[i] - 'A';
         } else{
-            indexOnTree = (int) word[i] - 'a';
+            indexOnTree = (int) word[i] - 'a' + 26;
         }
         if (temp->children[indexOnTree]) {
             temp = temp->children[indexOnTree];
@@ -200,7 +243,7 @@ Trie* delete_trie(Trie* root, char* word) {
         return root;
     // If the node corresponding to the match is not a leaf node,
     // we stop
-    if (!is_leaf_node(root, word)) {
+    if (!nodeIsLeaf(root, word)) {
         return root;
     }
     Trie* temp = root;
@@ -218,7 +261,7 @@ Trie* delete_trie(Trie* root, char* word) {
     for (i=0; longest_prefix[i] != '\0'; i++) {
 
         letterNumber = (int) longest_prefix[i];
-        if (letterNumber>=65 && letterNumber <=90){
+        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
             indexOnTree = (int) longest_prefix[i] - 'A';
         } else{
             indexOnTree = (int) longest_prefix[i] - 'a';
@@ -240,7 +283,7 @@ Trie* delete_trie(Trie* root, char* word) {
     int len = strlen(word);
     for (; i < len; i++) {
         letterNumber = (int) word[i];
-        if (letterNumber>=65 && letterNumber <=90){
+        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
             indexOnTree = (int) word[i] - 'A';
         } else{
             indexOnTree = (int) word[i] - 'a';
@@ -250,7 +293,7 @@ Trie* delete_trie(Trie* root, char* word) {
             // Delete the remaining sequence
             Trie* rm_node = temp->children[indexOnTree];
             temp->children[indexOnTree] = NULL;
-            free_trienode(rm_node);
+            freeMemoryTree(rm_node);
         }
     }
     free(longest_prefix);
@@ -274,31 +317,4 @@ void print_search(Trie* root, char* word) {
         printf("Not Found\n");
     else
         printf("Found!\n");
-}
-
-int usage() {
-    // Driver program for the Trie Data Structure Operations
-    Trie* root = doTrienode('\0');
-    root = insertOnTrie(root, "hello");
-    root = insertOnTrie(root, "hi");
-    root = insertOnTrie(root, "teabag");
-    root = insertOnTrie(root, "teacan");
-    print_search(root, "tea");
-    print_search(root, "teabag");
-    print_search(root, "teacan");
-    print_search(root, "hi");
-    print_search(root, "hey");
-    print_search(root, "hello");
-    print_trie(root);
-    printf("\n");
-    root = delete_trie(root, "hello");
-    printf("After deleting 'hello'...\n");
-    print_trie(root);
-    printf("\n");
-    root = delete_trie(root, "teacan");
-    printf("After deleting 'teacan'...\n");
-    print_trie(root);
-    printf("\n");
-    free_trienode(root);
-    return 0;
 }
