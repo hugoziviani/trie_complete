@@ -17,9 +17,9 @@ List * makeList();
 void push(List *list, int occurrence, char *word);
 void delete(int data, List * list);
 void printList(List * list);
-void reverse(List * list);
+void reverseList(List * list);
 void dealocateMemory(List * list);
 
-void sort(List *);
+void sortList(List *list);
 
 #endif //UNTITLED_LINKEDLIST_H

@@ -35,8 +35,9 @@ int main() {
         }
         if (input==3){
             List * elements = makeList();
-            searchPrefixOnTrie(root, "sh", elements);
-            sort(elements);
+            searchPrefixOnTrie(root, "she", elements);
+            sortList(elements);
+            reverseList(elements);
             printList(elements);
             dealocateMemory(elements);
             break;
@@ -53,11 +54,10 @@ int main() {
             push(elements, 22,  "ok5");
             push(elements, 999, "ok6");
             push(elements, 100,  "ok66");
-            sort(elements);
+            sortList(elements);
             printList(elements);
             dealocateMemory(elements);
-
-
+            break;
         }
     }
     //liberando espaço de memória alocado

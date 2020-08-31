@@ -37,7 +37,7 @@ List * makeList(){
 }
 
 void printList(List * list) {
-    reverse(list);
+    //reverseList(list);
     Node * current = list->head;
     if(list->head == NULL)
         return;
@@ -77,7 +77,7 @@ void delete(int data, List * list){
     }
 }
 
-void reverse(List * list){
+void reverseList(List * list){
     Node * reversed = NULL;
     Node * current = list->head;
     Node * temp = NULL;
@@ -99,25 +99,26 @@ void dealocateMemory(List * list){
         current = next;
     }
     free(list);
-    printf("Memória desalocada para lista de prefixos\n");
+    printf("\nMemória desalocada para lista de prefixos\n");
 }
 
-
-void sort(List *list){
+void sortList(List *list){
     int occurrencesMemory;
     char *word;
-    Node *temp1;
-    Node *temp2;
+    Node *current;
+    Node *nextNode;
 
-    for(temp1 = list->head; temp1 != NULL; temp1 = temp1->next){
-        for(temp2 = temp1->next; temp2 != NULL; temp2 = temp2->next){
-            if(temp2->occurrences < temp1->occurrences){
-                occurrencesMemory = temp1->occurrences;
-                //word = (char*) malloc(strlen(temp1->word) * sizeof(char));
-                word = temp1->word;
-                temp1->occurrences = temp2->occurrences;
-                temp2->occurrences = occurrencesMemory;
-                temp2->word = word;
+    for(current = list->head; current != NULL; current = current->next){
+        for(nextNode = current->next; nextNode != NULL; nextNode = nextNode->next){
+            if(nextNode->occurrences < current->occurrences){
+                occurrencesMemory = current->occurrences;
+                word = current->word;
+                //word = (char*) malloc(strlen(current->word) * sizeof(char));
+
+                current->occurrences = nextNode->occurrences;
+                current->word = nextNode->word;
+                nextNode->occurrences = occurrencesMemory;
+                nextNode->word = word;
             }
         }
     }
