@@ -13,7 +13,6 @@ struct list {
     Node * head;
 };
 
-Node *createNode(int occurrences, char *word);
 
 Node *createNode(int occurrences, char *word) {
     Node * newNode = malloc(sizeof(Node));
@@ -22,7 +21,6 @@ Node *createNode(int occurrences, char *word) {
     }
     newNode->occurrences = occurrences;
     newNode->word = word;
-    //TODO ALOCAR MEMORIA AQUI !!! se der pau
     newNode->next = NULL;
     return newNode;
 }
@@ -37,12 +35,11 @@ List * makeList(){
 }
 
 void printList(List * list) {
-    //reverseList(list);
     Node * current = list->head;
     if(list->head == NULL)
         return;
 
-    for(; current != NULL; current = current->next) {
+    for( ; current != NULL; current = current->next) {
         printf("%s (%d)\n",current->word, current->occurrences);
     }
 }
@@ -58,22 +55,6 @@ void push(List *list, int occurrence, char *word) {
             current = current->next;
         }
         current->next = createNode(occurrence, word);
-    }
-}
-
-void delete(int data, List * list){
-    Node * current = list->head;
-    Node * previous = current;
-    while(current != NULL){
-        if(current->occurrences == data){
-            previous->next = current->next;
-            if(current == list->head)
-                list->head = current->next;
-            free(current);
-            return;
-        }
-        previous = current;
-        current = current->next;
     }
 }
 
@@ -99,7 +80,7 @@ void dealocateMemory(List * list){
         current = next;
     }
     free(list);
-    printf("\nMemória desalocada para lista de prefixos\n");
+    printf("\nMemória da lista de prefixos desalocada\n");
 }
 
 void sortList(List *list){
@@ -114,7 +95,6 @@ void sortList(List *list){
                 occurrencesMemory = current->occurrences;
                 word = current->word;
                 //word = (char*) malloc(strlen(current->word) * sizeof(char));
-
                 current->occurrences = nextNode->occurrences;
                 current->word = nextNode->word;
                 nextNode->occurrences = occurrencesMemory;

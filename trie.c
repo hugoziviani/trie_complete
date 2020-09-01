@@ -15,7 +15,8 @@ struct Trie {
 Trie* doTrienode(char data) {
     // cria o nó e aloca memória
     Trie* node = (Trie*) calloc (1, sizeof(Trie));
-    for (int i=0; i < LETTERS; i++)
+    int i;
+    for (i=0; i < LETTERS; i++)
         node->children[i] = NULL;
     node->isLeaf = 0;
     node->data = data;
@@ -41,8 +42,8 @@ Trie* insertOnTrie(Trie* root, char* word) {
     Trie* temp = root;
     int letterNumber;
     int indexOnTree;
-
-    for (int i=0; word[i] != '\0'; i++) {
+    int i;
+    for (i=0; word[i] != '\0'; i++) {
         letterNumber = (int) word[i];
         if (letterNumber >= (int)'A' && letterNumber <= (int)'Z'){
             indexOnTree = (int) word[i] - 'A';
@@ -109,47 +110,33 @@ void searchUntilLeaf(Trie *root, List* occurrencesList) {
         //printf("%s (%i)\n", temp->completeWord, temp->occurences);
         push(occurrencesList, temp->occurences, temp->completeWord);
     }
-
-    for (int i=0; i < LETTERS; i++) {
+    int i;
+    for (i=0; i < LETTERS; i++) {
         searchUntilLeaf(temp->children[i], occurrencesList);
     }
 
 }
 
-int searchPrefixOnTrie(Trie *root, const char *prefix, List *occurrencesList) {
+int searchPrefixOnTrie(Trie *root, char *prefix, List *occurrencesList) {
     Trie* tempRoot = root;
     int letterNumber;
     int indexOnTree;
-
-    for (int i=0; prefix[i]!='\0'; i++) {
+    if(strcmp(prefix,"")==0)return 0;
+    int i;
+    for (i=0; prefix[i]!='\0'; i++) {
         letterNumber = (int) prefix[i];
-        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
+        if (letterNumber >= ASCINF && letterNumber <= ASCSUP){
             indexOnTree = (int) prefix[i] - 'A';
         } else{
             indexOnTree = (int) prefix[i] - 'a' + 26;
         }
-        if (tempRoot->children[indexOnTree]==NULL){
+        if (tempRoot->children[indexOnTree] == NULL){
             return 0;
         }
         if (tempRoot->children[indexOnTree]) {
             tempRoot = tempRoot->children[indexOnTree];
         }
-
     }
     searchUntilLeaf(tempRoot, occurrencesList);
     return 0;
-}
-
-void printTrie(Trie* root) {
-    // Prints the nodes of the trie
-    if (!root)
-        return;
-    Trie* temp = root;
-    if (temp->isLeaf && temp->completeWord != NULL){
-        printf("OOOOOFim: %s\n", temp->completeWord);
-    }
-    //printf("%c -> ", temp->occurrences);
-    for (int i=0; i < LETTERS; i++) {
-        printTrie(temp->children[i]);
-    }
 }

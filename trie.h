@@ -1,5 +1,5 @@
-#ifndef UNTITLED_TRIE_H
-#define UNTITLED_TRIE_H
+#ifndef TRIE_H
+#define TRIE_H
 
 #define LETTERS 52
 #define ASCINF 65
@@ -15,8 +15,6 @@ Trie* doTrienode(char data);
 void freeMemoryTree(Trie* node);
 Trie* insertOnTrie(Trie* root, char* word);
 int searchOnTrie(Trie* root, const char* word);
-int searchPrefixOnTrie(Trie *root, const char *prefix, List *occurrencesList);
-void printTrie(Trie* root);
+int searchPrefixOnTrie(Trie *root, char *prefix, List *occurrencesList);
 
-
-#endif //UNTITLED_TRIE_H
+#endif
