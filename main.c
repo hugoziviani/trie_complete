@@ -21,36 +21,43 @@ int main(int numargs, char *arg[]) {
         return EXIT_FAILURE;
     }
     if (strcmp (arg[2], "-iteractive") == 0  || strcmp (arg[2], "-i") == 0) {
-        printf ("Você está no Modo ITERATIVO:\n");
+        printf ("Você está no Modo ITERATIVO\n");
         char *path = arg[1];
+        char *outputPath = arg[3];
 
         Trie* root = doTrienode('\0');
         clock_t timeBegin, timeEnd;
         timeBegin= clock();
         readFileAndInsertTree(root, path);
         timeEnd= clock();
-        statistics(timeBegin, timeEnd, "Reading file and inserting on Trie", NULL);
+        statistics(timeBegin, timeEnd, "Lendo os arquivos e inserir na Trie", outputPath);
 
-        char inputUser[BUFSIZ];
+        char inputUser[20];
         int input;
 
         while (true){
-            printf( "Enter a value :");
+            printf( "Digite o prefixo desejado:\n");
             scanf("%s", inputUser);
             input = strcmp(inputUser, "0");
-
+            char *bkpIn = inputUser;
             if (input == 0) {
                 //liberando espaço de memória alocado
                 freeMemoryTree(root);
                 return EXIT_SUCCESS;
             }else if(input > 0) {
-
+                timeBegin = clock();
                 List * elements = makeList();
-                searchPrefixOnTrie(root, inputUser, elements);
+                searchPrefix(root, inputUser, elements);
                 sortList(elements);
                 reverseList(elements);
                 printList(elements);
                 dealocateMemory(elements);
+                timeEnd = clock();
+                char *msg = malloc(100);
+                strcat(msg, "O prefixo '");
+                strcat(msg, bkpIn);
+                strcat(msg,"' gastou ");
+                statistics(timeBegin, timeEnd, msg, outputPath);
             }else {
                 printf("\nTente um sufixo, ou ZERO p/ sair.\n");
             }
@@ -71,8 +78,8 @@ int main(int numargs, char *arg[]) {
 
         List * elements = makeList();
         int i;
-        for (i = 0; i < 26; i++) {
-            char str[12];
+        for (i = 0; i < ALPHABET_SIZE; i++) {
+            char str[BUFSIZ];
             sprintf(str, "%c", i + 65);
             timeBegin= clock();
             searchPrefixOnTrie(root, str, elements);

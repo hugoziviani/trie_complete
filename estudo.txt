@@ -1,4 +1,23 @@
-Estudo para compreender a estrutura de dados Trie.
+Introdução
+
+Foi requisitado aos estudantes, que fosse desenvolvido o algoritmo da estrutura de dados da Árvore Trie, popularmente conhecida como árvore de prefixos ou árvore digital. Após algumas buscas acerca dessa estrutura de dados, foi possível perceber, que é amplamente utilizada em sistemas de recomendação. Esses sistemas, sobretudo são presentes em softwares que vão ao longo do uso, mapeando as palavras mais recorrentes. Ao criar um léxico local esta rede formada pode servir para sugerir novas palavras na criação de outras novas frases.
+Para efeito de conhecimento, foram pesquisadas diversas implementações, e foi percebido a estrutura por si só guarda nós, ponteiros para outros nós e seus dados individuais. Logo foi possível perceber que a estrutura é facilmente adaptável para qualquer finalidade que tenha essa característica de modelagem. Para o corrente trabalho, optou-se por guardar em um nó o caractere correspondente à linhagem do nó, a informação se ele é uma folha e caso seja ele guardará consigo a palavra correspondente à terminação. Lembrando que, nó folha é a terminação de qualquer ramo da árvore digital. Junto à cada nó, que pode conter um caractere ou uma palavra, tem sua recorrência conforme a entrada de dados. 
+Estruturalmente, a entrada de dados deste trabalho é um texto que pode ser colocado na pasta input junto ao código, ou especificado um caminho completo até o arquivo. Para saída de dados existe um diretório chamado output que conterá após a execução no modo experimental (-exp ou -e) dados estatísticos sobre a execução da inserção de dados na árvore, e seu tempo de busca para todos os possíveis prefixos contendo somente a primeira letra do alfabeto. Vale ressaltar que para a entrada de dados, o algoritmo não foi preparado para receber caracteres com acento, cedilha e til. Basicamente o código foi desenvolvido para textos na língua inglesa.
+Ao executar o primeiro passo, o arquivo de entrada é lido linha a linha até encontrar o caractere '\n'. Ao terminar de ler a linha ela é encaminhada ao buffer para tratamento. O tratamento que essa string sofre é basicamente remoção de caracteres que não fazem parte do mapeamento da árvore. O mapeamento por sua vez é feito com base na tabela ASCII e está preparado para receber letras maiúsculas e minúsculas.
+Após o tratamento de cada linha e separação das palavras por meio de uma expressão regular, essas palavras são inseridas uma a uma na estrutura Trie. A cada palavra que a árvore recebe, vão sendo criados os nós conforme a necessidade. Para cada prefixo, existe a possibilidade de terminação em qualquer letra do alfabeto. Por meio de ponteiros cada nó aponta para o seu subsequente e ao chegar um nó que tem seu filho como null ele é marcado como a terminação da palavra recebida. Nesse nó é guardada a palavra completa e quantas vezes ela foi inserida, caso a palavra seja recorrente.
+
+Código
+	O código tem dois modos de execução. O modo iterativo que é chamado pelo comando:
+$ ./teste_trie ./input/big_texto.txt -i  #(ou -iteractive)
+Este modo deixa o console esperando o prefixo para sua busca na árvore. Como resultado são dados todos os possíveis prefixos e terminações a partir do modelo fornecido pelo usuário no terminal.
+	O outro modo de execução é o experimental, que não tem interação com o usuário. Este modo realiza o procedimento de leitura do arquivo fonte, inserção na árvore e realiza buscas com cada letra do alfabeto sendo o início de um prefixo a ser buscado na estrutura de dados. Um arquivo contendo os dados de tratamento, inserção e busca para cada prefixo é salvo no diretório output, como já mencionado. A linha de comando para ativar este modo é:
+./teste_trie ./input/big_texto.txt -e ./output/statistics.txt   #(ou -exp)
+
+Os dados estatísticos serão salvos com o nome e no local descritos na linha desse último comando.
+
+
+Informações úteis sobre a estrutura de dados Trie deste trabalho.
+
 1- Trie é uma árvore digital ou uma árvore de prefixos
 
 2- Cada nó tem um vetor de links para outros nós e o valor do próprio nó.
@@ -14,10 +33,10 @@ tem o tamanho do alfabeto escolhido.
 6- Quem armazena a cadeia completa dos caracteres é o nó folha. Até chegar neles a gente tem
 os prefixos de cada palavra.
 
-A consequência disso é o armazenamento de somente o prefixo das palavras.
+A consequência disso é o armazenamento de somente o prefixo das palavras. E no nó folha temos a palavra completa.
 
-Quando armazenamos uma cadeia de caracteres, a partir de um prefixo, consigo encontar
+Quando armazenamos uma cadeia de caracteres, a partir de um prefixo, consigo encontrar
 todas as cadeias que estão armazenada na árvore.
 
-OBJETIVO: dado um prefixo, consigo encontrar a palavra de maneira mais rápida e simples,
-sua recorrência de forma ordenada.
+OBJETIVO: dado um prefixo, consigo encontrar a palavra de maneira mais rápida e simples, sua recorrência de forma ordenada.
+

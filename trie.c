@@ -85,7 +85,7 @@ int searchOnTrie(Trie* root, const char* word)
         if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
             indexOnTree = (int) word[i] - 'A';
         } else{
-            indexOnTree = (int) word[i] - 'a';
+            indexOnTree = (int) word[i] - 'a' + 26;
         }
         if (temp->children[indexOnTree] == NULL){
             return 0;
@@ -117,15 +117,28 @@ void searchUntilLeaf(Trie *root, List* occurrencesList) {
 
 }
 
+int searchPrefix(Trie *root, char *prefix, List *occurrencesList){
+    if(prefix==NULL)return 0;
+    prefix[0] = (char) toupper(prefix[0]);
+    searchPrefixOnTrie(root, prefix, occurrencesList);
+    prefix[0] = (char) tolower(prefix[0]);
+    searchPrefixOnTrie(root, prefix, occurrencesList);
+    int i;
+    for (i=0; prefix[i]!='\0'; i++) {
+        prefix[i] = (char) toupper(prefix[i]);
+    }
+    searchPrefixOnTrie(root, prefix, occurrencesList);
+    return 0;
+}
+
+
 int searchPrefixOnTrie(Trie *root, char *prefix, List *occurrencesList) {
     Trie* tempRoot = root;
-    int letterNumber;
-    int indexOnTree;
-    if(strcmp(prefix,"")==0)return 0;
+    int indexOnTree, letterNumber;
     int i;
     for (i=0; prefix[i]!='\0'; i++) {
         letterNumber = (int) prefix[i];
-        if (letterNumber >= ASCINF && letterNumber <= ASCSUP){
+        if (letterNumber>=ASCINF && letterNumber <=ASCSUP){
             indexOnTree = (int) prefix[i] - 'A';
         } else{
             indexOnTree = (int) prefix[i] - 'a' + 26;
