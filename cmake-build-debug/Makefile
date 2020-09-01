@@ -68,10 +68,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/hz/CLionProjects/untitled
+CMAKE_SOURCE_DIR = /Users/hz/CLionProjects/trie_complete
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/hz/CLionProjects/untitled/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/hz/CLionProjects/trie_complete/cmake-build-debug
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -100,9 +100,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles /Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles /Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -142,6 +142,33 @@ untitled: cmake_check_build_system
 untitled/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/build
 .PHONY : untitled/fast
+
+linkedList.o: linkedList.c.o
+
+.PHONY : linkedList.o
+
+# target to build an object file
+linkedList.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/linkedList.c.o
+.PHONY : linkedList.c.o
+
+linkedList.i: linkedList.c.i
+
+.PHONY : linkedList.i
+
+# target to preprocess a source file
+linkedList.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/linkedList.c.i
+.PHONY : linkedList.c.i
+
+linkedList.s: linkedList.c.s
+
+.PHONY : linkedList.s
+
+# target to generate assembly for a file
+linkedList.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/untitled.dir/build.make CMakeFiles/untitled.dir/linkedList.c.s
+.PHONY : linkedList.c.s
 
 main.o: main.c.o
 
@@ -206,6 +233,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... untitled"
+	@echo "... linkedList.o"
+	@echo "... linkedList.i"
+	@echo "... linkedList.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

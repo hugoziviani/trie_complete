@@ -6,9 +6,7 @@
 
 #IncludeRegexTransform: 
 
-/Users/hz/CLionProjects/untitled/trie.c
-trie.h
-/Users/hz/CLionProjects/untitled/trie.h
+/Users/hz/CLionProjects/trie_complete/linkedList.h
 stdio.h
 -
 stdlib.h
@@ -16,5 +14,29 @@ stdlib.h
 string.h
 -
 
-/Users/hz/CLionProjects/untitled/trie.h
+/Users/hz/CLionProjects/trie_complete/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+stdbool.h
+-
+time.h
+-
+trie.h
+/Users/hz/CLionProjects/trie_complete/trie.h
+linkedList.h
+/Users/hz/CLionProjects/trie_complete/linkedList.h
+
+/Users/hz/CLionProjects/trie_complete/trie.h
+linkedList.h
+/Users/hz/CLionProjects/trie_complete/linkedList.h
+string.h
+-
+stdio.h
+-
+stdlib.h
+-
 

@@ -19,4 +19,5 @@ A consequência disso é o armazenamento de somente o prefixo das palavras.
 Quando armazenamos uma cadeia de caracteres, a partir de um prefixo, consigo encontar
 todas as cadeias que estão armazenada na árvore.
 
-OBJETIVO: dado um prefixo, consigo encontrar a palavra de maneira mais simples.
+OBJETIVO: dado um prefixo, consigo encontrar a palavra de maneira mais rápida e simples,
+sua recorrência de forma ordenada.

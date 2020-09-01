@@ -63,10 +63,10 @@ RM = /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/hz/CLionProjects/untitled
+CMAKE_SOURCE_DIR = /Users/hz/CLionProjects/trie_complete
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/hz/CLionProjects/untitled/cmake-build-debug
+CMAKE_BINARY_DIR = /Users/hz/CLionProjects/trie_complete/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/untitled.dir/depend.make
@@ -79,43 +79,58 @@ include CMakeFiles/untitled.dir/flags.make
 
 CMakeFiles/untitled.dir/main.c.o: CMakeFiles/untitled.dir/flags.make
 CMakeFiles/untitled.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/untitled.dir/main.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/untitled.dir/main.c.o   -c /Users/hz/CLionProjects/untitled/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/untitled.dir/main.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/untitled.dir/main.c.o   -c /Users/hz/CLionProjects/trie_complete/main.c
 
 CMakeFiles/untitled.dir/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/untitled.dir/main.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hz/CLionProjects/untitled/main.c > CMakeFiles/untitled.dir/main.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hz/CLionProjects/trie_complete/main.c > CMakeFiles/untitled.dir/main.c.i
 
 CMakeFiles/untitled.dir/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/untitled.dir/main.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hz/CLionProjects/untitled/main.c -o CMakeFiles/untitled.dir/main.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hz/CLionProjects/trie_complete/main.c -o CMakeFiles/untitled.dir/main.c.s
 
 CMakeFiles/untitled.dir/trie.c.o: CMakeFiles/untitled.dir/flags.make
 CMakeFiles/untitled.dir/trie.c.o: ../trie.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/untitled.dir/trie.c.o"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/untitled.dir/trie.c.o   -c /Users/hz/CLionProjects/untitled/trie.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/untitled.dir/trie.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/untitled.dir/trie.c.o   -c /Users/hz/CLionProjects/trie_complete/trie.c
 
 CMakeFiles/untitled.dir/trie.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/untitled.dir/trie.c.i"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hz/CLionProjects/untitled/trie.c > CMakeFiles/untitled.dir/trie.c.i
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hz/CLionProjects/trie_complete/trie.c > CMakeFiles/untitled.dir/trie.c.i
 
 CMakeFiles/untitled.dir/trie.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/untitled.dir/trie.c.s"
-	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hz/CLionProjects/untitled/trie.c -o CMakeFiles/untitled.dir/trie.c.s
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hz/CLionProjects/trie_complete/trie.c -o CMakeFiles/untitled.dir/trie.c.s
+
+CMakeFiles/untitled.dir/linkedList.c.o: CMakeFiles/untitled.dir/flags.make
+CMakeFiles/untitled.dir/linkedList.c.o: ../linkedList.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/untitled.dir/linkedList.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/untitled.dir/linkedList.c.o   -c /Users/hz/CLionProjects/trie_complete/linkedList.c
+
+CMakeFiles/untitled.dir/linkedList.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/untitled.dir/linkedList.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/hz/CLionProjects/trie_complete/linkedList.c > CMakeFiles/untitled.dir/linkedList.c.i
+
+CMakeFiles/untitled.dir/linkedList.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/untitled.dir/linkedList.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/hz/CLionProjects/trie_complete/linkedList.c -o CMakeFiles/untitled.dir/linkedList.c.s
 
 # Object files for target untitled
 untitled_OBJECTS = \
 "CMakeFiles/untitled.dir/main.c.o" \
-"CMakeFiles/untitled.dir/trie.c.o"
+"CMakeFiles/untitled.dir/trie.c.o" \
+"CMakeFiles/untitled.dir/linkedList.c.o"
 
 # External object files for target untitled
 untitled_EXTERNAL_OBJECTS =
 
 untitled: CMakeFiles/untitled.dir/main.c.o
 untitled: CMakeFiles/untitled.dir/trie.c.o
+untitled: CMakeFiles/untitled.dir/linkedList.c.o
 untitled: CMakeFiles/untitled.dir/build.make
 untitled: CMakeFiles/untitled.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable untitled"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable untitled"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/untitled.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -128,6 +143,6 @@ CMakeFiles/untitled.dir/clean:
 .PHONY : CMakeFiles/untitled.dir/clean
 
 CMakeFiles/untitled.dir/depend:
-	cd /Users/hz/CLionProjects/untitled/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/hz/CLionProjects/untitled /Users/hz/CLionProjects/untitled /Users/hz/CLionProjects/untitled/cmake-build-debug /Users/hz/CLionProjects/untitled/cmake-build-debug /Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/DependInfo.cmake --color=$(COLOR)
+	cd /Users/hz/CLionProjects/trie_complete/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /Users/hz/CLionProjects/trie_complete /Users/hz/CLionProjects/trie_complete /Users/hz/CLionProjects/trie_complete/cmake-build-debug /Users/hz/CLionProjects/trie_complete/cmake-build-debug /Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles/untitled.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/untitled.dir/depend
 

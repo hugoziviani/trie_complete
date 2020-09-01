@@ -4,8 +4,9 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
-  "/Users/hz/CLionProjects/untitled/main.c" "/Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/main.c.o"
-  "/Users/hz/CLionProjects/untitled/trie.c" "/Users/hz/CLionProjects/untitled/cmake-build-debug/CMakeFiles/untitled.dir/trie.c.o"
+  "/Users/hz/CLionProjects/trie_complete/linkedList.c" "/Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles/untitled.dir/linkedList.c.o"
+  "/Users/hz/CLionProjects/trie_complete/main.c" "/Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles/untitled.dir/main.c.o"
+  "/Users/hz/CLionProjects/trie_complete/trie.c" "/Users/hz/CLionProjects/trie_complete/cmake-build-debug/CMakeFiles/untitled.dir/trie.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 

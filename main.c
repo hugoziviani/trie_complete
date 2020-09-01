@@ -20,49 +20,27 @@ int main() {
     readFileAndInsertTree(root);
     t2= clock();
     statistics(t1, t2, "Reading file and inserting on Trie");
+    char inputUser [100];
     int input;
 
     while (true){
-        printf( "Enter a value :");
-        scanf("%d", &input);
-        if (input==0){
-            searchPrefixOnTrie(root, "she", NULL);
-            break;
-        }
-        if (input==1){
-            //searchUntilLeaf(root);
-            break;
-        }
-        if (input==3){
+        printf("\nEntre com o sufixo ou digite 0 para sair:\n");
+        scanf("%s", inputUser);
+        input = strcmp(inputUser, "0");
+
+        if (input == 0){
+            //liberando espaço de memória alocado
+            freeMemoryTree(root);
+            return EXIT_SUCCESS;
+        } else {
             List * elements = makeList();
-            searchPrefixOnTrie(root, "she", elements);
+            searchPrefixOnTrie(root, inputUser, elements);
             sortList(elements);
             reverseList(elements);
             printList(elements);
             dealocateMemory(elements);
-            break;
-        }
-        if (input==4){
-            printLetters();
-        }
-        if (input==5){
-            List * elements = makeList();
-            push(elements, 2, "ok1");
-            push(elements, 333, "ok2");
-            push(elements, 10,  "ok3");
-            push(elements, 3, "ok4");
-            push(elements, 22,  "ok5");
-            push(elements, 999, "ok6");
-            push(elements, 100,  "ok66");
-            sortList(elements);
-            printList(elements);
-            dealocateMemory(elements);
-            break;
         }
     }
-    //liberando espaço de memória alocado
-    freeMemoryTree(root);
-    return 0;
 }
 
 void readFileAndInsertTree(Trie *trie) {
